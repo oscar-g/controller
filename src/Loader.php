@@ -112,13 +112,14 @@ class Loader
      *
      * @return array
      */
-    public function getAppData()
+    public function getAppData($currentClass)
     {
-        if (array_key_exists('app', $this->instances)) {
+        if (array_key_exists('app', $this->instances) && $currentClass !== $this->instances['app']) {
             $app = new $this->instances['app']();
             $app->__setup();
             return $app->__getData();
         }
+
         return array();
     }
 
